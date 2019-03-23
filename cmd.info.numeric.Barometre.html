@@ -1,6 +1,6 @@
 <div style="min-width:80px; mini-height:90px;" class="cmd tooltips cmd-widget cursor container-fluid #history#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
  	<!-- Info Widget
-		Basé sur les widget de 	: jpoilux
+		Basé sur les widget de 		: jpoilux
 		Mise à jour 			: JAG 20190321 : Correction Bug non actualisation des données (merci à Antoinekl1 & cadavor)
 	-->
 	<center>
@@ -31,50 +31,53 @@
 		jeedom.cmd.update['#id#'] = function(_options){
       	// Options de personnalisation avec valeur par defaut 
         	// Paramètrage du logo
-				var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "Baro";
-        	// Paramètrage de la position de la légende
-				var srcImgleg_pos	= ('#leg_pos#'!='#'+'leg_pos#') ? "#leg_pos#" : "right";
+			var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "Baro";
+        	// Paramètre de la position de la légende
+			var srcImgleg_pos	= ('#leg_pos#'!='#'+'leg_pos#') ? "#leg_pos#" : "right";
         // Paramètre "sizehw" : à déclarer en pixels - 92 maxi
       			var srcImgHeight	= (is_numeric('#sizeh#')) ? parseFloat('#sizeh#') : 80;
       			var srcImgWidth 	= (is_numeric('#sizew#')) ? parseFloat('#sizew#') : 83;
-        // Paramétrage des images
+      // Paramétrage des images
         		var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.numeric.Barometre/'; 
-          
+           	  	var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "error";	         
       // Update
 			var srcPictureID;     
 			var State = parseFloat(_options.display_value);	
-			if (State <= 945){
-              	srcPictureID = "940";
-            } else if (State > 945 && State <= 955){
-              	srcPictureID = "960";
-            } else if (State > 955 && State <= 965){
-              	srcPictureID = "960";
-            } else if (State > 965 && State <=975){
-              	srcPictureID = "970";
-            } else if (State > 975 && State <=985){
-              	srcPictureID = "980";
-            } else if (State > 985 && State <=1005){
-              	srcPictureID = "1000";
-            } else if (State > 1005 && State <=1015){
-              	srcPictureID = "1010";
-            } else if (State > 1015 && State <=1025){
-              	srcPictureID = "1020";
-            } else if (State > 1025 && State <=1035){
-              	srcPictureID = "1030";
-            } else if (State > 1035 && State <=1045){
-              	srcPictureID = "1030";
-            } else if (State > 1045 && State <=1055){
-              	srcPictureID = "1050";
-            } else if (State > 1055){
-              	srcPictureID = "1060";
-            } else {
-              	srcPictureID = "error";
-            }        
-   
-		// Update Value or img
-          	$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL + srcImglogo+ +srcPictureID+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">'); 
-			$('.cmd[data-cmd_uid=#uid#] .state').text(State);
-			$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)    
+		if (State > 900 && State <= 954){
+              		srcPictureID = "940";
+            	} else if (State > 945 && State <= 955){
+              		srcPictureID = "960";
+            	} else if (State > 955 && State <= 965){
+              		srcPictureID = "960";
+            	} else if (State > 965 && State <=975){
+              		srcPictureID = "970";
+            	} else if (State > 975 && State <=985){
+              		srcPictureID = "980";
+            	} else if (State > 985 && State <=1005){
+              		srcPictureID = "1000";
+            	} else if (State > 1005 && State <=1015){
+              		srcPictureID = "1010";
+            	} else if (State > 1015 && State <=1025){
+              		srcPictureID = "1020";
+            	} else if (State > 1025 && State <=1035){
+              		srcPictureID = "1030";
+            	} else if (State > 1035 && State <=1045){
+              		srcPictureID = "1030";
+            	} else if (State > 1045 && State <=1055){
+              		srcPictureID = "1050";
+            	} else if (State > 1055 && State <=1500){
+              		srcPictureID = "1060";
+            	} else {
+              		srcPictureID = "error";
+            	}        
+	// Update IMG + gestion erreur
+          	if (srcPictureID == "error"){
+                	$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER+ '.png" style="height:80px;width:80px;">'); 	 
+                } else {
+                      	$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL + srcImglogo+ +srcPictureID+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+            	}
+		$('.cmd[data-cmd_uid=#uid#] .state').text(State);
+		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)    
       
     
 				// Paramétrage des affichage
