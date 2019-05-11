@@ -1,141 +1,136 @@
 <div style="min-width:80px; mini-height:90px;" class="cmd tooltips cmd-widget cursor container-fluid #history#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
- 	<!-- Info Widget
-		Basé sur les widget de 	: jpoilux
-		Mise à jour				: JAG 20190327 : Amélioration code Ajout variable pour définir l'extension du fichier (merci à fishes)
-	-->
-	<center>
-      		<span class='cmdName' style="font-weight: bold;font-size : 0.8em;width: 65px;height: 17px;overflow: hidden;position: relative;#hideCmdName#;" title="#name#">#name_display#</span>
-  	</center>
-  
-  <center>
-    	<div style="text-align:center;">
-          <div id="barometreDivIMG#id#" class="barometre_div_img">
-              <span id="barometreIMG#id#" class="iconCmd barometre_img"></span>
-          </div>
-          <div style="display:inline-block;">
-            <span class="barometre_state state"id="barometreState#id#">#state#</span>	
-            <span class="barometre_unite"id="barometreUnite#id#">#unite#</span>
-              <div class="#hide_history#"> <!-- légende -->
-                  <span style="margin-top : 10px;line-height:10px;font-size: 0.7em;display: inline-block;text-align: justify;#displayHistory#">
-                      <span title='Min' class='tooltips left'>Min : </span><span style="float:right;">#minHistoryValue# #unite#</span><br/>
-                      <span title='Moyenne' class='tooltips'>Moy : </span><span style="float:right;">#averageHistoryValue# #unite#</span><br/>
-                      <span title='Max' class='tooltips'>Max : </span><span style="float:right;">#maxHistoryValue# #unite#</span><br/>
-                      <i class="#tendance#"></i>
-                  </span>
-              </div>
-          </div>
+<!-- Info Widget
+        Basé sur les widget de 	: jpoilux
+        Mise à jour				: JAG 20190511 : Mise à jour du code nettoyage
+-->
+    <center>
+        <span class='cmdName' style="font-weight: bold;font-size : 0.8em;width: 65px;height: 17px;overflow: hidden;position: relative;#hideCmdName#;" title="#name#">#name_display#</span>
+    </center>
+    <center>
+        <div style="text-align:center;">
+            <div id="barometreDivIMG#id#" class="barometre_div_img">
+                <span id="barometreIMG#id#" class="iconCmd#id# barometre_img"></span>
+            </div>
+            <div style="display:inline-block;">
+                <span class="barometre_state state"id="barometreState#id#">#state#</span>	
+                <span class="barometre_unite"id="barometreUnite#id#">#unite#</span>
+                <div class="#hide_history#"> <!-- légende -->
+                    <span style="margin-top : 10px;line-height:10px;font-size: 0.7em;display: inline-block;text-align: justify;#displayHistory#">
+                        <span title='Min' class='tooltips left'>Min : </span><span style="float:right;">#minHistoryValue# #unite#</span><br/>
+                        <span title='Moyenne' class='tooltips'>Moy : </span><span style="float:right;">#averageHistoryValue# #unite#</span><br/>
+                        <span title='Max' class='tooltips'>Max : </span><span style="float:right;">#maxHistoryValue# #unite#</span><br/>
+                        <i class="#tendance#"></i>
+                    </span>
+                </div>
+            </div>
         </div>
-          
-	</center>
-	<script>
-		jeedom.cmd.update['#id#'] = function(_options){
-      	// Options de personnalisation avec valeur par defaut 
-        	// Paramètrage du logo
-				var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "Baro";
-				var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";
-		// Paramètrage du logo ERREUR		  	  
-				var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "oups";
-				var srcImglogoER_T 	= ('#logo_error_type#'!='#'+'logo_error_type#') ? "#logo_error_type#" : "png";
-        	// Paramètre de la position de la légende
-				var srcImgleg_pos	= ('#leg_pos#'!='#'+'leg_pos#') ? "#leg_pos#" : "right";
+    </center>
+<script>
+    jeedom.cmd.update['#id#'] = function(_options){
+        // Options de personnalisation avec valeur par defaut 
+            // Paramètrage du logo
+                var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "Baro";
+                var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";
+            // Paramètrage du logo ERREUR		  	  
+                var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "oups";
+                var srcImglogoER_T 	= ('#logo_error_type#'!='#'+'logo_error_type#') ? "#logo_error_type#" : "png";
+        // Paramètre de la position de la légende
+                var srcImgleg_pos	= ('#leg_pos#'!='#'+'leg_pos#') ? "#leg_pos#" : "right";
         // Paramètre "sizehw" : à déclarer en pixels - 92 maxi
-      			var srcImgHeight	= (is_numeric('#sizeh#')) ? parseFloat('#sizeh#') : 80;
-      			var srcImgWidth 	= (is_numeric('#sizew#')) ? parseFloat('#sizew#') : 83;
-      // Paramétrage des images
+                var srcImgHeight	= (is_numeric('#sizeh#')) ? parseFloat('#sizeh#') : 80;
+                var srcImgWidth 	= (is_numeric('#sizew#')) ? parseFloat('#sizew#') : 83;
+        // Paramétrage des images
                 var srcImgURL 	    = 'plugins/widget/core/template/dashboard/cmd.info.numeric.Barometre/'; 
-
-       
-      // Update
-			var srcPictureID;     
-			var State = parseFloat(_options.display_value);	
-		if (State > 900 && State <= 954){
-              		srcPictureID = "940";
-            	} else if (State > 945 && State <= 955){
-              		srcPictureID = "960";
-            	} else if (State > 955 && State <= 965){
-              		srcPictureID = "960";
-            	} else if (State > 965 && State <=975){
-              		srcPictureID = "970";
-            	} else if (State > 975 && State <=985){
-              		srcPictureID = "980";
-            	} else if (State > 985 && State <=1005){
-              		srcPictureID = "1000";
-            	} else if (State > 1005 && State <=1015){
-              		srcPictureID = "1010";
-            	} else if (State > 1015 && State <=1025){
-              		srcPictureID = "1020";
-            	} else if (State > 1025 && State <=1035){
-              		srcPictureID = "1030";
-            	} else if (State > 1035 && State <=1045){
-              		srcPictureID = "1030";
-            	} else if (State > 1045 && State <=1055){
-              		srcPictureID = "1050";
-            	} else if (State > 1055 && State <=1500){
-              		srcPictureID = "1060";
-            	} else {
-              		srcPictureID = "error";
-            	}        
-	// Update IMG + gestion erreur
-          	if (srcPictureID == "error"){
-                	$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER +'.'+ srcImglogoER_T+'" style="height:80px;width:80px;">'); 	 
-                } else {
-                      	$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL + srcImglogo +srcPictureID +'.'+ srcImglogo_T+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
-            	}
-		$('.cmd[data-cmd_uid=#uid#] .state').text(State);
-		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)    
-      
+        
+        // Update
+                var srcPictureID;     
+                var State = parseFloat(_options.display_value);	
+            if (State > 900 && State <= 954){
+                srcPictureID = "940";
+            } else if (State > 945 && State <= 955){
+                srcPictureID = "960";
+            } else if (State > 955 && State <= 965){
+                srcPictureID = "960";
+            } else if (State > 965 && State <=975){
+                srcPictureID = "970";
+            } else if (State > 975 && State <=985){
+                srcPictureID = "980";
+            } else if (State > 985 && State <=1005){
+                srcPictureID = "1000";
+            } else if (State > 1005 && State <=1015){
+                srcPictureID = "1010";
+            } else if (State > 1015 && State <=1025){
+                srcPictureID = "1020";
+            } else if (State > 1025 && State <=1035){
+                srcPictureID = "1030";
+            } else if (State > 1035 && State <=1045){
+                srcPictureID = "1030";
+            } else if (State > 1045 && State <=1055){
+                srcPictureID = "1050";
+            } else if (State > 1055 && State <=1500){
+                srcPictureID = "1060";
+            } else {
+                srcPictureID = "error";
+            }        
+        // Update IMG + gestion erreur
+            if (srcPictureID == "error"){
+                $('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="'+srcImgURL +srcImglogoER +'.'+ srcImglogoER_T+'" style="height:80px;width:80px;">'); 	 
+            } else {
+                $('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="'+srcImgURL + srcImglogo +srcPictureID +'.'+ srcImglogo_T+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+            }
+            $('.cmd[data-cmd_uid=#uid#] .state').text(State);
+            $('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)    
     
-				// Paramétrage des affichage
-					// Position image
-						if (srcImgleg_pos == "right"){
-                          $("#barometreDivIMG#id#.barometre_div_img").css("float","left");
-                          $("#barometreIMG#id#.barometre_img").css("margin-right","15px"); 
-                      	} else if (srcImgleg_pos == "left"){
-                          $("#barometreDivIMG#id#.barometre_div_img").css("float","right");
-                          $("#barometreIMG#id#.barometre_img").css("margin-left","15px");
-                      	} else { 
-                          //aucune modification nécessaire
-                      	}
-					// Position Texte 
-      						$("#barometreUnite#id#.barometre_unite").css("margin-top","-30px");
-                        if (srcImgleg_pos == "right") {
-                            $("#barometreState#id#.barometre_state").css("margin-left","-30px"); 
-                            $("#barometreUnite#id#.barometre_unite").css("display","block");
-                            $("#barometreUnite#id#.barometre_unite").css("margin-left","60px");
-                        } else if (srcImgleg_pos == "left"){
-                            $("#barometreState#id#.barometre_state").css("margin-right","18px"); 
-                            $("#barometreUnite#id#.barometre_unite").css("display","block");
-                            $("#barometreUnite#id#.barometre_unite").css("margin-left","70px");
-                        } else if (srcImgleg_pos == "low"){ 
-                            $("#barometreUnite#id#.barometre_unite").css("display","block");
-                            
-                            $("#barometreUnite#id#.barometre_unite").css("margin-left","90px");
-                        }
+        // Paramétrage des affichage
+            // Position image
+                if (srcImgleg_pos == "right"){
+                    $("#barometreDivIMG#id#.barometre_div_img").css("float","left");
+                    $("#barometreIMG#id#.barometre_img").css("margin-right","15px"); 
+                } else if (srcImgleg_pos == "left"){
+                    $("#barometreDivIMG#id#.barometre_div_img").css("float","right");
+                    $("#barometreIMG#id#.barometre_img").css("margin-left","15px");
+                } else { 
+                    //aucune modification nécessaire
+                }
+            // Position Texte 
+                $("#barometreUnite#id#.barometre_unite").css("margin-top","-30px");
+                if (srcImgleg_pos == "right") {
+                    $("#barometreState#id#.barometre_state").css("margin-left","-30px"); 
+                    $("#barometreUnite#id#.barometre_unite").css("display","block");
+                    $("#barometreUnite#id#.barometre_unite").css("margin-left","60px");
+                } else if (srcImgleg_pos == "left"){
+                    $("#barometreState#id#.barometre_state").css("margin-right","18px"); 
+                    $("#barometreUnite#id#.barometre_unite").css("display","block");
+                    $("#barometreUnite#id#.barometre_unite").css("margin-left","70px");
+                } else if (srcImgleg_pos == "low"){ 
+                    $("#barometreUnite#id#.barometre_unite").css("display","block");        
+                    $("#barometreUnite#id#.barometre_unite").css("margin-left","90px");
+                }
       
-	}
-	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
-	</script>
+    }
+    jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
+</script>
 </div>
 <style> 
 span.barometre_img {
-  	height: 80px;
-  }
+    height: 80px;
+    }
 span.barometre_div_img {
     margin-left: 5px;
-	position:relative;
-  	height: 64px;
-  	width: 62px;
-	float:left;
-  }  
+    position:relative;
+    height: 64px;
+    width: 62px;
+    float:left;
+    }  
 span.barometre_state {
-  	font-weight: bold;
-  	font-size: 1.5em;
-  	margin-top: 5px;
-  	display: block;
-  }
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 5px;
+    display: block;
+    }
 span.barometre_unite {
-  	font-size: 0.7em;
-  	margin-top: 5px;
-  	top: 22px;
-  }
+    font-size: 0.7em;
+    margin-top: 5px;
+    top: 22px;
+    }
 </style>
