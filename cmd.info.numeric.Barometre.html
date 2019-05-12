@@ -13,7 +13,7 @@
             </div>
             <div style="display:inline-block;">
                 <span class="barometre_state state"id="barometreState#id#" style="text-align: right">#state#</span>
-                <div class="#hide_history#"> <!-- légende -->
+                <div class="#hide_history#">
                     <span style="margin-top : 10px;line-height:10px;font-size: 0.7em;display: inline-block;text-align: justify;#displayHistory#">
                         <span title='Min' class='tooltips left'>Min : </span><span style="float:right;">#minHistoryValue# #unite#</span><br/>
                         <span title='Moyenne' class='tooltips'>Moy : </span><span style="float:right;">#averageHistoryValue# #unite#</span><br/>
@@ -94,16 +94,11 @@
             // Position Texte 
                 $("#barometreUnite#id#.barometre_unite").css("margin-top","-30px");
                 if (srcImgleg_pos == "right") {
-                    $("#barometreState#id#.barometre_state").css("margin-left","-30px"); 
-                    $("#barometreUnite#id#.barometre_unite").css("display","block");
-                    $("#barometreUnite#id#.barometre_unite").css("margin-left","60px");
+                    $("#barometreState#id#.barometre_state").css("margin-left","-30px");
                 } else if (srcImgleg_pos == "left"){
-                    $("#barometreState#id#.barometre_state").css("margin-right","18px"); 
-                    $("#barometreUnite#id#.barometre_unite").css("display","block");
-                    $("#barometreUnite#id#.barometre_unite").css("margin-left","70px");
+                    $("#barometreState#id#.barometre_state").css("margin-right","18px");
                 } else if (srcImgleg_pos == "low"){ 
-                    $("#barometreUnite#id#.barometre_unite").css("display","block");        
-                    $("#barometreUnite#id#.barometre_unite").css("margin-left","90px");
+                    //aucune modification nécessaire
                 }
     }
     jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
