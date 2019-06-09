@@ -1,7 +1,7 @@
 <div style="min-width:80px; mini-height:90px;" class="cmd tooltips cmd-widget cursor container-fluid #history#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
     <!-- Info Widget
         Basé sur les widget de 	: jpoilux
-        Mise à jour				: JAG 20190519 : Mise à jour du code nettoyage
+        Mise à jour				: JAG 20190608 Amélioration
     -->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -16,10 +16,10 @@
             </div>
             <!-- Historique -->
                 <div class="cmdStats #hide_history#" style="#displayHistory# font-size : 10px;text-align: left;">
-                    <span title="Min" style="float:right;">Min : #minHistoryValue# #unite#</span><br/>
-                    <span title="Moy" style="float:right;">Moy : #averageHistoryValue# #unite#</span><br/>
-                    <span title="Max" style="float:right;">Max : #maxHistoryValue# #unite#</span><br/>
-                    <i class="#tendance#"></i> 
+                    <span title="Min" style="float:left;">Min : #minHistoryValue# #unite#</span><br/>
+                    <span title="Moy" style="float:left;">Moy : #averageHistoryValue# #unite#</span><br/>
+                    <span title="Max" style="float:left;">Max : #maxHistoryValue# #unite#</span><br/>
+                    <i class="#tendance#"></i>
             </div>
         </div>
     </div>
@@ -37,9 +37,10 @@
         // Paramètre "sizehw" : à déclarer en pixels - 92 maxi
                 var srcImgHeight	= (is_numeric('#sizeh#')) ? parseFloat('#sizeh#') : 80;
                 var srcImgWidth 	= (is_numeric('#sizew#')) ? parseFloat('#sizew#') : 83;
+                var srcImgSize      = 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
         // Paramétrage des images
                 var srcImgURL 	    = 'plugins/widget/core/template/dashboard/cmd.info.numeric.Barometre/';
-        
+
         // Update
                 var srcPictureID;
                 var State = parseFloat(_options.display_value);
