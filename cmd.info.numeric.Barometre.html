@@ -1,7 +1,7 @@
 <div style="min-width:80px; mini-height:90px;" class="cmd tooltips cmd-widget cursor container-fluid #history#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
     <!-- Info Widget
         Basé sur les widget de 	: jpoilux
-        Mise à jour				: JAG 20190608 Amélioration
+        Mise à jour				: JAG 20190907 : Normalisation nom images => Merci à mich0111
     -->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -27,10 +27,10 @@
     jeedom.cmd.update['#id#'] = function(_options){
         // Options de personnalisation avec valeur par defaut
             // Paramètrage du logo
-                var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "Baro";
+                var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "baro_";
                 var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";
             // Paramètrage du logo ERREUR
-                var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "oups";
+                var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "er_oups1";
                 var srcImglogoER_T 	= ('#logo_error_type#'!='#'+'logo_error_type#') ? "#logo_error_type#" : "png";
         // Paramètre de la position de la légende
                 var srcImgleg_pos	= ('#leg_pos#'!='#'+'leg_pos#') ? "#leg_pos#" : "right";
